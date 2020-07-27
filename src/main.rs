@@ -16,7 +16,7 @@ const GPIO_PWM: u8 = 23;
 //
 // Period: 20 ms (50 Hz). Pulse width: min. 1200 μs, neutral 1500 μs, max. 1800 μs.
 const PERIOD_MS: u64 = 20;
-const PULSE_MIN_US: u64 = 450;
+const PULSE_MIN_US: u64 = 550;
 const PULSE_NEUTRAL_US: u64 = 900;
 const PULSE_MAX_US: u64 = 800;
 
@@ -49,7 +49,7 @@ fn light_on() -> Result<(), Box<dyn Error>> {
 
     pin.set_pwm(
         Duration::from_millis(PERIOD_MS),
-        Duration::from_micros(PULSE_NEUTRAL_US),
+        Duration::from_micros(PULSE_MIN_US),
     )?;
 
     println!("Light:On");
@@ -69,7 +69,7 @@ fn light_off() -> Result<(), Box<dyn Error>> {
     // Rotate the servo to the opposite side.
     pin.set_pwm(
         Duration::from_millis(PERIOD_MS),
-        Duration::from_micros(PULSE_MIN_US),
+        Duration::from_micros(PULSE_NEUTRAL_US),
     )?;
 
     println!("Light:Off");
